@@ -4,19 +4,19 @@ import { bindActionCreators } from 'redux';
 import * as targetListActions from '../../actions/targetListActions';
 import PropTypes from 'prop-types';
 
+import TargetCell from '../TargetCell';
+
 class TargetList extends Component {
     renderData(target) {
             return (
-                <div key={target.id}>
-                    {target.companyName}
-                </div>
+                <TargetCell key={target.id} company={target} />
             )
     }
 
 
     render() {
         return (
-            <div className="">
+            <div className="container">
                 {this.props.targets.length > 0 ?
                     this.props.targets.map(t => this.renderData(t))
                     :

@@ -5,9 +5,14 @@ import {
 
 const INITIAL_STATE = {
     targets: [
-        { id: 1, companyName: 'X' },
-        { id: 2, companyName: 'Y' },
-        { id: 3, companyName: 'Z' },
+        { id: 1, companyName: 'Apple' },
+        { id: 2, companyName: 'Insiten' },
+        { id: 3, companyName: 'Narwhal' },
+        { id: 4, companyName: 'Ethereum' },
+        { id: 5, companyName: 'Meetup' },
+        { id: 6, companyName: 'Guitar Center' },
+        { id: 7, companyName: 'Boo Digital' },
+        { id: 8, companyName: 'Make & Build' },
     ]
 };
 
