@@ -1,5 +1,5 @@
-import * as TargetListActions from './EventListActions';
-import * as TargetActions from './EventListActions';
+import * as TargetListActions from './targetListActions';
+import * as TargetActions from './targetActions';
 
 export {
     TargetListActions,

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
+import { connect } from 'react-redux';
 
+import { TargetListActions } from '../../actions';
 import TargetList from '../../components/TargetList';
 import NewTargetModal from '../../components/NewTargetModal';
 
+const { addTarget, removeTarget } = TargetListActions;
 
 class Home extends Component {
     constructor(props) {
@@ -114,4 +116,8 @@ const mainStyle = {
     }
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {}
+};
+
+export default connect(mapStateToProps, { addTarget, removeTarget })(Home);
