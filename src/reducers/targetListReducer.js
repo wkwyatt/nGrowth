@@ -2,6 +2,7 @@ import { generateId } from '../helpers/generators';
 import {
     ADD_TARGET,
     REMOVE_TARGET,
+    EDIT_TARGET,
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -88,7 +89,7 @@ export default function targetList(state = INITIAL_STATE, action) {
     switch (action.type) {
         case ADD_TARGET:
             console.log('ADD_TARGET Action');
-            return { ...state, targets: [ ...state.targets, { id: generateId(), ...action.payload.target} ] };
+            return { ...state, targets: [ ...state.targets, { ...action.payload.target, id: generateId() } ] };
         // case DECLINE_TARGET:
         //     return state.targets.map((e) => {
         //         if (e.id == action.payload.id) {
@@ -99,6 +100,12 @@ export default function targetList(state = INITIAL_STATE, action) {
         //         }
         //         return e;
         //     });
+        case EDIT_TARGET:
+            return { ...state, targets: state.targets.map((e) => {
+                console.log(e.id, action.payload.target.id);
+                if(action.payload.target && e.id == action.payload.target.id) return action.payload.target;
+                return e;
+            })};
         case REMOVE_TARGET:
             return { ...state, targets: state.targets.filter((e) => e.id !== action.payload.id) };
         default:

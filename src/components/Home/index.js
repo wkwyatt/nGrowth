@@ -8,7 +8,7 @@ import NewTargetForm from '../../components/NewTargetForm';
 import { Button } from 'react-bootstrap';
 // import Line from 'react-chartjs';
 
-const { addTarget, removeTarget } = TargetListActions;
+const { addTarget, removeTarget, editTarget } = TargetListActions;
 
 class Home extends Component {
     constructor(props) {
@@ -47,13 +47,18 @@ class Home extends Component {
         this.closeModal();
     };
 
+    saveTarget = (target) => {
+        this.props.editTarget(target);
+        this.closeModal();
+    };
+
     showTargetModal = (target) => {
         console.log('show target modal', target);
         const modalContent = (
             <div>
                 <NewTargetForm
                     target={target}
-                    onSaveClicked={this.addTarget}
+                    onSaveClicked={this.saveTarget}
                     onDeleteClicked={() => {
                         this.props.removeTarget(target.id);
                         this.closeModal();
@@ -159,4 +164,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { addTarget, removeTarget })(Home);
+export default connect(mapStateToProps, { addTarget, removeTarget, editTarget })(Home);

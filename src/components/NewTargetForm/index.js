@@ -51,6 +51,7 @@ export default class NewTargetForm extends Component {
         var imgURL = companyName.split(' ').join('').toLowerCase();
         imgURL = imgURL.length < 2 ? 'http://via.placeholder.com/350x150?text=logo' : `//logo.clearbit.com/${imgURL}.com`;
         const newTarget = {
+            id: target ? target.id : 123,
             companyName: companyName,
             status: status,
             logo: imgURL,
@@ -79,8 +80,7 @@ export default class NewTargetForm extends Component {
                 </ButtonToolbar>
                 { target ? (
                     <div>
-                        <Button bsStyle="primary" onClick={() => {
-                        }} style={{marginRight: 10}}>Save</Button>
+                        <Button bsStyle="primary" onClick={() => this.props.onSaveClicked(newTarget)} style={{marginRight: 10}}>Save</Button>
                         <Button bsStyle="warning" onClick={() => this.props.onDeleteClicked(target.id)}>Delete</Button>
                     </div>
                 ) : <Button bsStyle="primary" onClick={() => this.props.onCreateClicked(newTarget)}>Create New Target</Button> }
