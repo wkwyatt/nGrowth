@@ -19,8 +19,8 @@ const INITIAL_STATE = {
 };
 
 export default function targetList(state = INITIAL_STATE, action) {
-    var index;
-    var newState;
+    // var index;
+    // var newState;
     switch (action.type) {
         case ADD_TARGET:
             console.log('ADD_TARGET Action');

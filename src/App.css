@@ -49,6 +49,7 @@
   width: 348px;
   align-self: center;
   background-color: rgba(214, 224, 226, 0.2);
+  padding: 20px;
 }
 
 .target-cell .cover {
@@ -58,6 +59,8 @@
   background-color: darkgray;
 }
 .target-cell .cover h2 {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 .target-cell .user {
@@ -72,6 +75,34 @@
 .target-cell .user img {
   width: 100%;
 }
+
+.target-cell-footer {
+  border-top: 1px solid #EEEEEE;
+  color: #999999;
+  margin: 30px 0 0;
+  padding: 10px 0 0;
+  text-align: center;
+}
+
+.target-cell-details {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  background-color: #4a4a4a;
+}
+
+.status-container { margin: 20px 10px; }
+.status-bubble {
+  display: inline-block;
+  margin-right: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.status-bubble.researching { background-color: purple }
+.status-bubble.pending { background-color: #ffc800 }
+.status-bubble.approved { background-color: green }
+.status-bubble.declined { background-color: red }
 
 .modal-overlay-container {
   position: fixed;

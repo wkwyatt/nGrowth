@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 // import ReduxThunk from 'redux-thunk';
 // import ReduxPromise from 'redux-promise';
-import { autoRehydrate } from 'redux-persist';
+// import { autoRehydrate } from 'redux-persist';
 import rootReducer from '../reducers';
 
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { TargetListActions } from '../../actions';
 import TargetList from '../../components/TargetList';
-import NewTargetModal from '../../components/NewTargetModal';
+import MainModal from '../../components/MainModal';
 
 const { addTarget, removeTarget } = TargetListActions;
 
@@ -14,7 +14,15 @@ class Home extends Component {
         // set initial state
         this.state = {
             isModalOpen: false,
+            targets: props.targets,
+            modalContent: React.node,
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.targets !== this.props.targets) {
+            this.setState({ targets: nextProps.targets });
+        }
     }
 
     // close modal (set isModalOpen, true)
@@ -31,10 +39,36 @@ class Home extends Component {
         })
     };
 
-    addTargetClicked = () => {
+    createNewTargetClicked = () => {
         const newTarget = { companyName: 'SAMSUNG' }
         this.props.addTarget(newTarget);
         this.closeModal();
+    };
+
+    newTargetButtonClicked = () => {
+        const modalContent = (
+            <div>
+                <img width="100%" style={{borderRadius: 3}} src="https://source.unsplash.com/random" alt="unsplash"/>
+                <button
+                    style={{
+                        ...mainStyle.button,
+                        margin: 0,
+                        width: 'auto',
+                        marginTop: 10
+                    }}
+                    onClick={this.createNewTargetClicked}
+                >Create New Target</button>
+            </div>
+        );
+        this.setState({ modalContent });
+        this.openModal();
+    };
+
+    showFinancialPerformance = (target) => {
+        console.log('finance', target);
+        const modalContent = <div>TEST</div>;
+        this.setState({ modalContent });
+        this.openModal();
     };
 
     render() {
@@ -42,25 +76,20 @@ class Home extends Component {
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to Insiten</h1>
-                    <button style={mainStyle.button} onClick={this.openModal}>New Target</button>
+                    <button style={mainStyle.button} onClick={this.newTargetButtonClicked}>New Target</button>
                 </header>
-                <TargetList />
-                <NewTargetModal
+                <TargetList
+                    targets={this.state.targets}
+                    removeTarget={this.props.removeTarget}
+                    showFinancialPerformance={this.showFinancialPerformance}
+                />
+                <MainModal
                     isModalOpen={this.state.isModalOpen}
                     closeModal={this.closeModal}
                     style={modalStyle}
                 >
-
-                    <input type="text" />
-                    <img width="100%" style={{borderRadius: 3}} src="https://source.unsplash.com/random" alt="unsplash"/>
-
-                    <button style={{
-                        ...mainStyle.button,
-                        margin: 0,
-                        width: 'auto',
-                        marginTop: 10
-                    }} onClick={this.addTargetClicked}>Create New Target</button>
-                </NewTargetModal>
+                    {this.state.modalContent}
+                </MainModal>
             </div>
         );
     }
@@ -75,7 +104,6 @@ const modalStyle = {
         width: '100%',
         height: '100%',
         overflow: 'auto',
-        height: '100%',
         zIndex: 1
     },
     modalOverlay: {
@@ -123,7 +151,9 @@ const mainStyle = {
 };
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        targets : state.targetList.targets
+    };
 };
 
 export default connect(mapStateToProps, { addTarget, removeTarget })(Home);
