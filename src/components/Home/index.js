@@ -29,7 +29,13 @@ class Home extends Component {
         this.setState({
             isModalOpen: true
         })
-    }
+    };
+
+    addTargetClicked = () => {
+        const newTarget = { companyName: 'SAMSUNG' }
+        this.props.addTarget(newTarget);
+        this.closeModal();
+    };
 
     render() {
         return (
@@ -53,7 +59,7 @@ class Home extends Component {
                         margin: 0,
                         width: 'auto',
                         marginTop: 10
-                    }} onClick={this.closeModal}>Close</button>
+                    }} onClick={this.addTargetClicked}>Create New Target</button>
                 </NewTargetModal>
             </div>
         );

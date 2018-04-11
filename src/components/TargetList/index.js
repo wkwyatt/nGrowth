@@ -1,24 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as targetListActions from '../../actions/targetListActions';
-import PropTypes from 'prop-types';
+import { TargetListActions } from '../../actions';
 
 import TargetCell from '../TargetCell';
 
+const { removeTarget } = TargetListActions;
+
 class TargetList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            targets: props.targets
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.targets != this.props.targets) {
+            this.setState({ targets: nextProps.targets });
+        }
+    }
+
     renderData(target) {
             return (
-                <TargetCell key={target.id} company={target} />
+                <TargetCell
+                    key={target.id}
+                    company={target}
+                    removeButtonClicked={this.props.removeTarget}
+                />
             )
     }
 
-
     render() {
+        console.log('redering',this.state.targets);
         return (
             <div className="container">
-                {this.props.targets.length > 0 ?
-                    this.props.targets.map(t => this.renderData(t))
+                {this.state.targets.length > 0 ?
+                    this.state.targets.map(t => this.renderData(t))
                     :
                     <div className="">
                         No Data
@@ -29,30 +48,11 @@ class TargetList extends Component {
     }
 }
 
-TargetList.propTypes = {
-    targetListActions: PropTypes.object,
-    targets: PropTypes.array
-};
-
-TargetList.defaultProps = {
-    targetListActions: {},
-    targets: []
-};
-
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     console.log(state);
     return {
        targets : state.targetList.targets
     };
-}
+};
 
-function mapDispatchToProps(dispatch) {
-    return {
-        targetListActions: bindActionCreators(targetListActions, dispatch)
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TargetList);
+export default connect(mapStateToProps, { removeTarget })(TargetList);
