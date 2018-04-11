@@ -103,7 +103,7 @@ export default function targetList(state = INITIAL_STATE, action) {
         case EDIT_TARGET:
             return { ...state, targets: state.targets.map((e) => {
                 console.log(e.id, action.payload.target.id);
-                if(action.payload.target && e.id == action.payload.target.id) return action.payload.target;
+                if(action.payload.target && e.id === action.payload.target.id) return action.payload.target;
                 return e;
             })};
         case REMOVE_TARGET:

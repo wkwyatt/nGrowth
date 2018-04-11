@@ -14,14 +14,14 @@ export default ({company, removeButtonClicked, showFinancialPerformance, onEditC
                     <div className="status-container"><span className={`status-bubble ${company.status}`} />{company.status}</div>
                     <div className="target-cell-company-info top-info">
                         <h4>Company Info:</h4>
-                        {company.companyInfo.map(c => (
-                            <span>{c}</span>
+                        {company.companyInfo.map((c, index) => (
+                            <span key={index}>{c}</span>
                         ))}
                     </div>
                     <div className="target-cell-company-info">
                         <h4>Key Contacts:</h4>
-                        {company.keyContact.map(c => (
-                            <span>{c}</span>
+                        {company.keyContact.map((c, index) => (
+                            <span key={index}>{c}</span>
                         ))}
                     </div>
                     <div className="target-cell-footer" onClick={() => showFinancialPerformance(company)}>
@@ -32,15 +32,3 @@ export default ({company, removeButtonClicked, showFinancialPerformance, onEditC
         </div>
     );
 }
-
-const styles = {
-    statusBubble: {
-        width: 10,
-        height: 10,
-        borderRadius: '50%',
-    },
-    researching: { backgroundColor: 'purple' },
-    pending: { backgroundColor: 'yellow' },
-    approved: { backgroundColor: 'green' },
-    declined: { backgroundColor: 'red' },
-};

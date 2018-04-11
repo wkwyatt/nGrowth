@@ -41,7 +41,6 @@ export default class NewTargetForm extends Component {
         const length = this.state.companyName.length;
         if (length > 1) return 'success';
         else return 'error';
-        return null;
     };
 
     render() {
