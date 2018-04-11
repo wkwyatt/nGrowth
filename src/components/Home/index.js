@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { TargetListActions } from '../../actions';
 import TargetList from '../../components/TargetList';
 import MainModal from '../../components/MainModal';
+import NewTargetForm from '../../components/NewTargetForm';
+import { Button } from 'react-bootstrap';
+// import Line from 'react-chartjs';
 
 const { addTarget, removeTarget } = TargetListActions;
 
@@ -39,25 +42,24 @@ class Home extends Component {
         })
     };
 
-    createNewTargetClicked = () => {
-        const newTarget = { companyName: 'SAMSUNG' }
+    createNewTargetClicked = (newTarget) => {
         this.props.addTarget(newTarget);
         this.closeModal();
     };
 
-    newTargetButtonClicked = () => {
+    showTargetModal = (target) => {
+        console.log('show target modal', target);
         const modalContent = (
             <div>
-                <img width="100%" style={{borderRadius: 3}} src="https://source.unsplash.com/random" alt="unsplash"/>
-                <button
-                    style={{
-                        ...mainStyle.button,
-                        margin: 0,
-                        width: 'auto',
-                        marginTop: 10
+                <NewTargetForm
+                    target={target}
+                    onSaveClicked={this.addTarget}
+                    onDeleteClicked={() => {
+                        this.props.removeTarget(target.id);
+                        this.closeModal();
                     }}
-                    onClick={this.createNewTargetClicked}
-                >Create New Target</button>
+                    onCreateClicked={this.createNewTargetClicked}
+                />
             </div>
         );
         this.setState({ modalContent });
@@ -76,12 +78,13 @@ class Home extends Component {
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Welcome to Insiten</h1>
-                    <button style={mainStyle.button} onClick={this.newTargetButtonClicked}>New Target</button>
+                    <button style={mainStyle.button} onClick={() => this.showTargetModal()}>New Target</button>
                 </header>
                 <TargetList
                     targets={this.state.targets}
                     removeTarget={this.props.removeTarget}
                     showFinancialPerformance={this.showFinancialPerformance}
+                    onEditClicked={this.showTargetModal}
                 />
                 <MainModal
                     isModalOpen={this.state.isModalOpen}

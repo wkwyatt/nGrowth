@@ -22,7 +22,7 @@
   font-size: large;
 }
 
-.container {
+.target-container {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-.container > .target-cell-container {
+.target-container > .target-cell-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,11 +40,11 @@
   margin: 10px 20px 20px;
 }
 
-.container > .target-cell-container.target-cell-clicked {
+.target-container > .target-cell-container.target-cell-clicked {
   flex: 3;
 }
 
-.container > .target-cell-container > .target-cell {
+.target-container > .target-cell-container > .target-cell {
   /*flex: 1;*/
   width: 348px;
   align-self: center;
@@ -75,6 +75,13 @@
 .target-cell .user img {
   width: 100%;
 }
+.target-cell .edit-button {
+  display: inline-block;
+  float: right;
+}
+.target-cell .edit-button {
+  /*display: inline-block;*/
+}
 
 .target-cell-footer {
   border-top: 1px solid #EEEEEE;
@@ -84,11 +91,25 @@
   text-align: center;
 }
 
-.target-cell-details {
-  position: absolute;
-  height: 300px;
+.target-cell-company-info.top-info{
+  border-bottom: 2px solid #4a4a4a;
+  padding-bottom: 20px;
+}
+
+.target-cell-company-info > span {
+  color: #4a4a4a;
+}
+
+.target-cell-company-info {
+  /*position: absolute;*/
+  display: flex;
+  flex-direction: column;
+  min-height: 60px;
   width: 100%;
-  background-color: #4a4a4a;
+  margin-bottom: 20px;
+  align-self: flex-start;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .status-container { margin: 20px 10px; }
@@ -99,10 +120,31 @@
   height: 10px;
   border-radius: 50%;
 }
-.status-bubble.researching { background-color: purple }
-.status-bubble.pending { background-color: #ffc800 }
-.status-bubble.approved { background-color: green }
-.status-bubble.declined { background-color: red }
+.status-bubble.researching { background-color: #800080; }
+.researching.active { background-color: #490049 !important; }
+.status-bubble.researching:hover, .researching:hover { background-color: #cd00cd !important; }
+.status-bubble.pending { background-color: #ffc800 !important; }
+.pending.active { background-color: #d2a700 !important; }
+.status-bubble.pending:hover, .pending:hover { background-color: #fff038 !important; }
+.status-bubble.approved { background-color: green !important; }
+.approved.active { background-color: #005c00 !important; }
+.status-bubble.approved:hover, .approved:hover { background-color: #00c800 !important; }
+.status-bubble.declined { background-color: red !important; }
+.declined.active { background-color: #ba0000 !important; }
+.status-bubble.declined:hover, .declined:hover { background-color: #ff4b5c !important; }
+
+.status-selector {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.status-selector-btn.active {
+  color: #fff !important;
+}
+.status-selector-btn:hover {}
+.status-selector-btn.active {}
 
 .modal-overlay-container {
   position: fixed;

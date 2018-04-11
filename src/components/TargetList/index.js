@@ -9,12 +9,13 @@ export default (props) => {
                 company={target}
                 removeButtonClicked={props.removeTarget}
                 showFinancialPerformance={props.showFinancialPerformance}
+                onEditClicked={props.onEditClicked}
             />
         )
     };
 
     return (
-        <div className="container">
+        <div className="target-container">
             {props.targets.length > 0 ?
                 props.targets.map(t => renderData(t))
                 :

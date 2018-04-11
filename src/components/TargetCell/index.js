@@ -1,16 +1,32 @@
 import React from 'react';
 import TargetHeader from '../TargetHeader';
+import { Button, Glyphicon } from 'react-bootstrap';
 
-export default ({company, removeButtonClicked, showFinancialPerformance}) => {
+export default ({company, removeButtonClicked, showFinancialPerformance, onEditClicked}) => {
     return (
         <div key={company.id} className="target-cell-container target-cell-clicked">
             <div className="target-cell">
-                <button className="main-button" onClick={() => removeButtonClicked(company.id)}>X</button>
                 <TargetHeader name={company.companyName} logo={company.logo} />
-                <div className="status-container"><span className={`status-bubble ${company.status}`} />{company.status}</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda facere molestiae rerum veritatis? A ad alias corporis dolorum, ducimus fugiat, id in iste labore minus modi mollitia nemo soluta voluptatum.</p>
-                <div className="target-cell-footer" onClick={() => showFinancialPerformance(company)}>
-                    <i className="fa fa-mail-forward"></i> Financial Performance
+                <div>
+                    <Button className="edit-button" bsSize="large" onClick={() => onEditClicked(company)}>
+                        <Glyphicon glyph="pencil" />
+                    </Button>
+                    <div className="status-container"><span className={`status-bubble ${company.status}`} />{company.status}</div>
+                    <div className="target-cell-company-info top-info">
+                        <h4>Company Info:</h4>
+                        {company.companyInfo.map(c => (
+                            <span>{c}</span>
+                        ))}
+                    </div>
+                    <div className="target-cell-company-info">
+                        <h4>Key Contacts:</h4>
+                        {company.keyContact.map(c => (
+                            <span>{c}</span>
+                        ))}
+                    </div>
+                    <div className="target-cell-footer" onClick={() => showFinancialPerformance(company)}>
+                        <i className="fa fa-mail-forward"></i> Financial Performance
+                    </div>
                 </div>
             </div>
         </div>
